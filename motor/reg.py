@@ -1,5 +1,5 @@
 protocol1 = {
-    'Resolution' : 1024,
+    'Resolution' : [1024, 0.292],
     'Alarm LED': [17, 1],
     'Baud Rate': [4, 1],
     'CCW Angle Limit': [8, 2],
@@ -35,7 +35,7 @@ protocol1 = {
 }
 
 protocol2 = {
-    'Resolution' : 1024,
+    'Resolution' : [4096, 0.088],
     'Acceleration Limit': [40, 4],
     'Baud Rate': [8, 1],
     'Current Limit': [38, 2],
@@ -91,7 +91,7 @@ protocol2 = {
 }
 
 protocol1_mx = {
-    'Resolution' : 4096,
+    'Resolution' : [4096, 0.088],
     'Alarm LED': [17, 1],
     'Baud Rate': [4, 1],
     'CCW Angle Limit': [8, 2],

@@ -129,16 +129,14 @@ class motor(object):
         else:
             return None
 
-
-
     def __write(self, DXL_ID, data, value):
         """
-        Reads a given value in the control table from the specified motor.
+        Writes a given value in the control table from the specified motor.
         Args:
             DXL_ID: Motor ID
             data: string having data name from control table
         Returns:
-            Present value at the given position
+            Boolean value if the write succeeds
         """
         pos = self._register[data][0]
         size = self._register[data][1]
@@ -153,6 +151,37 @@ class motor(object):
             return True
         else:
             return False
+
+    def set_goal_position(self, DXL_ID, value):
+        """
+        Sets goal position using the __write command
+        Args:
+            DXL_ID: Motor ID
+            value: Angle to be written. Ranges from -(MAX / 2) to (MAX / 2), MAX is the operating angle limit
+        Returns:
+            Boolean value if write succeeds
+        """
+        lim = self._register['Goal Position'][0] / 2
+        res = self._register['Goal Position'][1]
+        val = lim + (value / res)
+        return self.__write(DXL_ID, 'Goal Position', val)
+
+    def get_present_position(self, DXL_ID):
+        """
+        Reads the current position using the __read method
+        Args:
+            DXL_ID: Motor ID
+        Returns:
+            Real value denoting the current position of the motor
+        """
+        lim = self._register['Present Position'][0] / 2
+        res = self._register['Present Position'][1]
+        angle = self.__read(DXL_ID, 'Present Position')
+        if angle is None:
+            return angle
+        else:
+            return (angle - lim) * res
+
 '''
     def createByteArray(bin_value):
         byte_array = [DXL_LOBYTE(DXL_LOWORD(bin_value)), DXL_HIBYTE(DXL_LOWORD(bin_value)), DXL_LOBYTE(DXL_HIWORD(bin_value)), DXL_HIBYTE(DXL_HIWORD(bin_value))]
