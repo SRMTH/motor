@@ -37,7 +37,7 @@ class motor(object):
             print("Failed to open port")
 
         try:
-            assert self.packetHandler.setBaudRate(self.BAUDRATE)
+            assert self.portHandler.setBaudRate(self.BAUDRATE)
             print("Changed baudrate successfully")
         except AssertionError:
             print("Failed to change baudrate")

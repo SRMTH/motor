@@ -19,6 +19,4 @@ setup(
         install_requires = [
             'dynamixel_sdk',
             ]
-        include_package_data = True,
-        zip_safe = False
         )
